@@ -1,0 +1,12 @@
+body {
+    background: $white;
+    color: rgba($black, .7);
+    font-size: 1em;
+    height: 100%;
+    line-height: 1.5;
+    min-height: 100%;
+    position: relative;
+    text-shadow: rgba(0,0,0,.01) 0 0 1px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}

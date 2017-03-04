@@ -1,0 +1,53 @@
+label {
+    color: rgba($black, .7);
+    display: block;
+    font-size: 1.6em;
+    margin-bottom: .75em;
+}
+input, textarea {
+    @include padding-box();
+    background-color: $white;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    width: 100%;
+    padding: .75em;
+    border: 1px solid $light-gray;
+    font-size: 1.6em;
+    resize: none;
+}
+input[type=text]:focus {
+    outline: none;
+    border: 1px solid $gray;
+}
+
+input[type=checkbox] {
+    -webkit-appearance:none;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    border: 1px solid $gray;
+    background: $white;
+    &:checked {
+        background: $blue;
+    }
+    &:focus{
+        outline: 0;
+    }
+}
+
+::-webkit-input-placeholder {
+   	color: rgba($black, .3);
+   	opacity: 1;
+}
+:-moz-placeholder {
+   	color: rgba($black, .3);
+   	opacity: 1;
+}
+::-moz-placeholder {
+   	color: rgba($black, .3);
+   	opacity: 1;
+}
+:-ms-input-placeholder {
+   	color: rgba($black, .3);
+   	opacity: 1;
+}

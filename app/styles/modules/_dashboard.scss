@@ -1,0 +1,24 @@
+.dashboard {
+    margin-top: 5em;
+    margin-bottom: 1em;
+
+    .settings {
+        text-align: right;
+
+        .settings-toggle {
+            color: $gray;
+            font-size: 0.8em;
+        }
+
+        p { 
+            margin: 1em;
+            text-align: left;
+        }
+        p.force-refresh { 
+            margin-top: 0;
+            margin-bottom: 2em;
+            font-size: 0.8em;
+            text-align: center; 
+        }
+    }
+}

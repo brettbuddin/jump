@@ -1,0 +1,22 @@
+.is-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.is-visually-hidden {
+    position: absolute;
+    left: -9999%;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+.layout-page-content {
+    @include clearfix();
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+    padding: 0 30px;
+    position: relative;
+}

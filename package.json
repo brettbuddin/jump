@@ -4,12 +4,9 @@
   "description": "GitHub Dashboard",
   "author": "Brett Buddin",
   "version": "0.0.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/brettbuddin/jump"
-  },
+  "repository": "https://github.com/brettbuddin/jump",
   "scripts": {
-    "clean":  "rm -rf build/ && rm -rf dist/",
+    "clean": "rm -rf build/ && rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "webpack",
     "predeploy": "npm run clean && webpack --optimize-minimize --output-path=dist/",
@@ -17,6 +14,7 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "moment": "2.11.2",
     "mousetrap": "^1.5.3",
     "react": "~0.14.7",
@@ -42,5 +40,7 @@
     "urijs": "^1.17.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
-  }
+  },
+  "main": "index.js",
+  "license": "MIT"
 }

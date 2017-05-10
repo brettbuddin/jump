@@ -9,7 +9,7 @@ var Filter = React.createClass({
             items:       [],          // List of items to operate on
             inputName:   'filter',    // Name of the input field
             placeholder: 'Search...', // Default text of the input field
-            delay:       100,         // Minimum allowed result update rate (in milliseconds)
+            delay:       50,          // Minimum allowed result update rate (in milliseconds)
         };
     },
     propTypes: {
@@ -24,6 +24,11 @@ var Filter = React.createClass({
             inputValue: '', // Current value of the input field
             focused: 0,     // Result row that has focus (reset to 0 when inputValue is updated)
         };
+    },
+    componentDidUpdate: function(prevProps, prevState) {
+        if (!_.isEqual(this.props.items, prevProps.items)) {
+            this.updateResults();
+        }
     },
     componentDidMount: function() {
         var filter = this;

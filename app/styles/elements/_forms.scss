@@ -11,13 +11,13 @@ input, textarea {
     -webkit-appearance: none;
     width: 100%;
     padding: .75em;
-    border: 1px solid $light-gray;
+    border: 2px solid $light-gray;
     font-size: 1.6em;
     resize: none;
 }
 input[type=text]:focus {
     outline: none;
-    border: 1px solid $gray;
+    border: 2px solid $gray;
 }
 
 input[type=checkbox] {

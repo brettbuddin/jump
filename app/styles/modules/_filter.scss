@@ -17,6 +17,10 @@
     }
 }
 
+.is-fetching input {
+    background-color: $pale-yellow;
+}
+
 .hints {
     color: $light-gray;
     display: block;

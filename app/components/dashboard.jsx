@@ -1,9 +1,10 @@
-var React    = require('react');
-var Moment   = require('moment');
-var _        = require('underscore');
-var Github   = require('../lib/github.js');
-var Filter   = require('./filter.jsx');
-var Settings = require('./settings.jsx');
+var React      = require('react');
+var Moment     = require('moment');
+var _          = require('underscore');
+var Github     = require('../lib/github.js');
+var Filter     = require('./filter.jsx');
+var Settings   = require('./settings.jsx');
+var classnames = require('classnames');
 
 var Dashboard = React.createClass({
     getInitialState: function() {
@@ -11,6 +12,7 @@ var Dashboard = React.createClass({
             repos: [], 
             user: {},
             filterHidden:   false,
+            fetching: false,
             settingsHidden: true
         }
     },
@@ -23,15 +25,27 @@ var Dashboard = React.createClass({
         var dashboard = this;
         var now       = Moment();
         var refresh   = function() {
-            Github(token).get('/user/repos').then(function(pages) {
-                Promise.all(pages).then(_.flatten).then(function(rawRepos) {
-                    var repos = _.map(rawRepos, function(r) {
-                        return { id: r.id, name: r.full_name, url: r.html_url };
-                    });
+            dashboard.setState({fetching: true});
 
-                    dashboard.setState({repos: repos});
-                    localStorage.setItem('repos', JSON.stringify(repos));
-                    localStorage.setItem('last_refresh', now.format());
+            Github(token)
+                .get('/user/repos')
+                .then(function(pages) {
+                    Promise
+                        .all(pages)
+                        .then(_.flatten)
+                        .then(function(rawRepos) {
+                            var repos = _.map(rawRepos, function(r) {
+                                return { id: r.id, name: r.full_name, url: r.html_url };
+                            });
+
+                            dashboard.setState({fetching: false});
+                            dashboard.setState({repos: repos});
+                            localStorage.setItem('repos', JSON.stringify(repos));
+                            localStorage.setItem('last_refresh', now.format());
+                    })
+                .catch(function(err) {
+                    console.log(err);
+                    dashboard.setState({fetching: false});
                 });
             });
         };
@@ -67,12 +81,15 @@ var Dashboard = React.createClass({
         return (
         <div className="dashboard">
             <div className="settings">
-                <a href="#" className="settings-toggle" onClick={this.toggleSettingsClick}>Settings</a>
+                <a href="#" className="settings-toggle" onClick={this.toggleSettingsClick}>{this.state.settingsHidden ? 'Settings' : 'Hide Settings'}</a>
                 <div className={this.state.settingsHidden ? 'is-hidden' : ''}>
                     <Settings onChange={this.settingsChanged} />
                 </div>
             </div>
-            <div className={this.state.filterHidden ? 'is-hidden' : ''}>
+            <div className={classnames({
+                    'is-hidden': this.state.filterHidden,
+                    'is-fetching': this.state.fetching,
+                })}>
                 <Filter items={this.state.repos} placeholder="Jump to repository..." />
             </div>
         </div>

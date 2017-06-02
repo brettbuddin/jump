@@ -57,18 +57,16 @@ var Dashboard = React.createClass({
             return;
         }
 
-        if (now.isAfter(lastRefresh.add(1, 'hour'))) {
-            refresh();
-            return;
-        }
-
         var jsonRepos = localStorage.getItem('repos');
         if (_.isNull(jsonRepos)) {
             refresh();
             return;
         }
-
         this.setState({repos: JSON.parse(jsonRepos)});
+
+        if (now.isAfter(lastRefresh.add(1, 'hour'))) {
+            refresh();
+        }
     },
     toggleSettingsClick: function(e) {
         e.preventDefault();
